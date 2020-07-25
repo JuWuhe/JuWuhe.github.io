@@ -3,7 +3,8 @@
   <entry>
     <title>EasyDown 学习记录</title>
     <url>/EasyDown.html</url>
-    <content><![CDATA[<h1 id="EasyDown"><a href="#EasyDown" class="headerlink" title="EasyDown"></a>EasyDown</h1><p>Unity的是男人就下一百层的2D小游戏</p>
+    <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
+<p>Unity的是男人就下一百层的2D小游戏</p>
 <a id="more"></a>
 
 <h2 id="背景移动的实现"><a href="#背景移动的实现" class="headerlink" title="背景移动的实现"></a>背景移动的实现</h2><h3 id="脚本控制Material的Offset"><a href="#脚本控制Material的Offset" class="headerlink" title="脚本控制Material的Offset"></a>脚本控制Material的Offset</h3><h4 id="1-脚本获取Quard的Material"><a href="#1-脚本获取Quard的Material" class="headerlink" title="1.脚本获取Quard的Material"></a>1.脚本获取Quard的Material</h4><p>​    因为Quard上并没有Material的项目，而是通过Mesh Renderer调整材质，所以需要用：</p>

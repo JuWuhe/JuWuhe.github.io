@@ -28,7 +28,7 @@
 <meta property="og:description" content="基于Unity的真男人就下一百层的2D小游戏">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-18T02:57:11.000Z">
-<meta property="article:modified_time" content="2020-07-25T09:03:17.681Z">
+<meta property="article:modified_time" content="2020-08-08T04:07:11.607Z">
 <meta property="article:author" content="Insyent">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-25 17:03:17" itemprop="dateModified" datetime="2020-07-25T17:03:17+08:00">2020-07-25</time>
+                <time title="修改时间：2020-08-08 12:07:11" itemprop="dateModified" datetime="2020-08-08T12:07:11+08:00">2020-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,8 +260,22 @@
 <h2 id="背景移动的实现"><a href="#背景移动的实现" class="headerlink" title="背景移动的实现"></a>背景移动的实现</h2><h3 id="脚本控制Material的Offset"><a href="#脚本控制Material的Offset" class="headerlink" title="脚本控制Material的Offset"></a>脚本控制Material的Offset</h3><h4 id="1-脚本获取Quard的Material"><a href="#1-脚本获取Quard的Material" class="headerlink" title="1.脚本获取Quard的Material"></a>1.脚本获取Quard的Material</h4><p>​    因为Quard上并没有Material的项目，而是通过Mesh Renderer调整材质，所以需要用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">material &#x3D; GetComponent&lt;Renderer&gt;().material;</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-脚本控制Material的Offset"><a href="#2-脚本控制Material的Offset" class="headerlink" title="2.脚本控制Material的Offset"></a>2.脚本控制Material的Offset</h4><p>由<strong>public</strong> Vector2 speed来控制Vecotr2 movement的变化，再用movement将值通过Material的mainTextureOffset方法传入。</p>
+<h4 id="2-脚本控制Material的Offset"><a href="#2-脚本控制Material的Offset" class="headerlink" title="2.脚本控制Material的Offset"></a>2.脚本控制Material的Offset</h4><p>​    由<strong>public</strong> Vector2 speed来控制Vecotr2 movement的变化，再用movement将值通过Material的mainTextureOffset方法传入。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movement +&#x3D; speed * Time.deltaTime;</span><br><span class="line">material.mainTextureOffset &#x3D; movement;</span><br></pre></td></tr></table></figure>
+
+<h2 id="几种平台功能的实现"><a href="#几种平台功能的实现" class="headerlink" title="几种平台功能的实现"></a>几种平台功能的实现</h2><h3 id="翻转平台"><a href="#翻转平台" class="headerlink" title="翻转平台"></a>翻转平台</h3><p>​    通过Hinge Joint实现，不用代码</p>
+<h3 id="弹跳平台"><a href="#弹跳平台" class="headerlink" title="弹跳平台"></a>弹跳平台</h3><h4 id="1-弹跳动画切换"><a href="#1-弹跳动画切换" class="headerlink" title="1.弹跳动画切换"></a>1.弹跳动画切换</h4><p>​    在idle和run动画间切换，通过OnCollisionEnter2D方法检查碰撞和标签来通过Animator播放run动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void OnCollisionEnter2D(Collision2D collision)</span><br><span class="line">   &#123;</span><br><span class="line">      if (collision.gameObject.CompareTag(&quot;Player&quot;))</span><br><span class="line">       &#123;</span><br><span class="line">          animator.Play(&quot;FanPlatform_run&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-弹跳功能实现"><a href="#2-弹跳功能实现" class="headerlink" title="2.弹跳功能实现"></a>2.弹跳功能实现</h4><h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
+<h2 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h2><h3 id="上升"><a href="#上升" class="headerlink" title="上升"></a>上升</h3><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void MovePlatform()</span><br><span class="line">&#123;</span><br><span class="line">    transform.position +&#x3D; movement * Time.deltaTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h3><p>​    为了避免随着游戏运行，平台一直上升的情况，需要设置临界点使平台消失。设置Empty为Topline，在代码中通过GameObject的Find方法获取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">topline &#x3D; GameObject.Find(&quot;TopLine&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>​    在MovePlatform方法中添加销毁代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if(transform.position.y &gt;&#x3D; topline.transform.position.y)</span><br><span class="line">&#123;</span><br><span class="line">  Destroy(gameObject);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -337,7 +351,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景移动的实现"><span class="nav-text">背景移动的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本控制Material的Offset"><span class="nav-text">脚本控制Material的Offset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-脚本获取Quard的Material"><span class="nav-text">1.脚本获取Quard的Material</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-脚本控制Material的Offset"><span class="nav-text">2.脚本控制Material的Offset</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景移动的实现"><span class="nav-text">背景移动的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本控制Material的Offset"><span class="nav-text">脚本控制Material的Offset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-脚本获取Quard的Material"><span class="nav-text">1.脚本获取Quard的Material</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-脚本控制Material的Offset"><span class="nav-text">2.脚本控制Material的Offset</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种平台功能的实现"><span class="nav-text">几种平台功能的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#翻转平台"><span class="nav-text">翻转平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹跳平台"><span class="nav-text">弹跳平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-弹跳动画切换"><span class="nav-text">1.弹跳动画切换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-弹跳功能实现"><span class="nav-text">2.弹跳功能实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摇摆铁锤"><span class="nav-text">摇摆铁锤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平台控制"><span class="nav-text">平台控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上升"><span class="nav-text">上升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#销毁"><span class="nav-text">销毁</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

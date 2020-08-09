@@ -31,7 +31,7 @@
 <meta property="og:description" content="基于Unity的真男人就下一百层的2D小游戏">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-18T02:57:11.000Z">
-<meta property="article:modified_time" content="2020-08-08T06:31:22.990Z">
+<meta property="article:modified_time" content="2020-08-09T09:21:38.292Z">
 <meta property="article:author" content="Insyent">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-08 14:31:22" itemprop="dateModified" datetime="2020-08-08T14:31:22+08:00">2020-08-08</time>
+                <time title="修改时间：2020-08-09 17:21:38" itemprop="dateModified" datetime="2020-08-09T17:21:38+08:00">2020-08-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,16 +276,14 @@ material.mainTextureOffset = movement;</code></pre>
 }</code></pre>
 <h4 id="2-弹跳功能实现"><a href="#2-弹跳功能实现" class="headerlink" title="2.弹跳功能实现"></a>2.弹跳功能实现</h4><h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
 <h2 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h2><h3 id="上升"><a href="#上升" class="headerlink" title="上升"></a>上升</h3><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
-<pre><code class="line-numbers language-c#">
-void MovePlatform()
+<pre><code class="line-numbers language-c#">void MovePlatform()
 {
     transform.position += movement * Time.deltaTime;
 }</code></pre>
 <h3 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h3><p>​    为了避免随着游戏运行，平台一直上升的情况，需要设置临界点使平台消失。设置Empty为Topline，在代码中通过GameObject的Find方法获取。</p>
 <pre><code class="line-numbers language-c#">topline = GameObject.Find(&quot;TopLine&quot;);</code></pre>
 <p>​    在MovePlatform方法中添加销毁代码</p>
-<pre><code class="line-numbers language-c#">
-if(transform.position.y &gt;= topline.transform.position.y)
+<pre><code class="line-numbers language-c#">if(transform.position.y &gt;= topline.transform.position.y)
 {
   Destroy(gameObject);
 }</code></pre>

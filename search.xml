@@ -17,22 +17,47 @@ material.mainTextureOffset = movement;</code></pre>
 {
     if (collision.gameObject.CompareTag(&quot;Player&quot;))
     {
-    animator.Play(&quot;FanPlatform_run&quot;);
+        animator.Play(&quot;FanPlatform_run&quot;);
     }
 }</code></pre>
-<h4 id="2-弹跳功能实现"><a href="#2-弹跳功能实现" class="headerlink" title="2.弹跳功能实现"></a>2.弹跳功能实现</h4><h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
-<h2 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h2><h3 id="上升"><a href="#上升" class="headerlink" title="上升"></a>上升</h3><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
+<h4 id="2-弹跳功能实现"><a href="#2-弹跳功能实现" class="headerlink" title="2.弹跳功能实现"></a>2.弹跳功能实现</h4><p>​    OnCollisionEnter2D方法检测</p>
+<pre><code class="line-numbers language-c#">private void OnCollisionEnter2D(Collision2D collision) 
+{
+    if (collision.gameObject.CompareTag(&quot;Fan&quot;))
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 10f);
+    }    
+}</code></pre>
+<p><em>附：OnCollisionEnter和OnTriggerEnter的区别</em></p>
+<p><img src="/D:%5Cblog%5Csource_posts%5CEasyDown%5C%E5%8C%BA%E5%88%AB.png" alt="区别"></p>
+<h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
+<h3 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h3><h4 id="1-上升"><a href="#1-上升" class="headerlink" title="1.上升"></a>1.上升</h4><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
 <pre><code class="line-numbers language-c#">void MovePlatform()
 {
     transform.position += movement * Time.deltaTime;
 }</code></pre>
-<h3 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h3><p>​    为了避免随着游戏运行，平台一直上升的情况，需要设置临界点使平台消失。设置Empty为Topline，在代码中通过GameObject的Find方法获取。</p>
+<h4 id="2-销毁"><a href="#2-销毁" class="headerlink" title="2.销毁"></a>2.销毁</h4><p>​    为了避免随着游戏运行，平台一直上升的情况，需要设置临界点使平台消失。设置Empty为Topline，在代码中通过GameObject的Find方法获取。</p>
 <pre><code class="line-numbers language-c#">topline = GameObject.Find(&quot;TopLine&quot;);</code></pre>
 <p>​    在MovePlatform方法中添加销毁代码</p>
 <pre><code class="line-numbers language-c#">if(transform.position.y &gt;= topline.transform.position.y)
 {
   Destroy(gameObject);
 }</code></pre>
+<h2 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h2><h3 id="站地检测"><a href="#站地检测" class="headerlink" title="站地检测"></a>站地检测</h3><p>​        通过Physics2D.OverlapCircle(vector2 point,float radius,int LayerMask)方法检测是否站地: 点、半径、图层，以地面检测点点为圆心作半径圆，检测地面图层</p>
+<pre><code class="line-numbers language-c#">bool isOnGround;
+public float checkRadius;
+public LayerMask platform;
+public GameObject groundCheck;
+
+//Update:
+isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,platform);</code></pre>
+<p>​        可以通过OnDrawGizmosSelected()可视化绘制一个圆用作checkRadius</p>
+<pre><code class="line-numbers language-c#">    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        //如果使用DrawSphere则是实心的
+        Gizmos.DrawWireSphere(groundCheck.transform.position, checkRadius);
+    }</code></pre>
 ]]></content>
       <categories>
         <category>Unity</category>

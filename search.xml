@@ -29,7 +29,7 @@ material.mainTextureOffset = movement;</code></pre>
     }    
 }</code></pre>
 <p><em>附：OnCollisionEnter和OnTriggerEnter的区别</em></p>
-<p><img src="/EasyDown%5C1.png" alt></p>
+<p><img src="/1.png" alt></p>
 <h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
 <h3 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h3><h4 id="1-上升"><a href="#1-上升" class="headerlink" title="1.上升"></a>1.上升</h4><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
 <pre><code class="line-numbers language-c#">void MovePlatform()

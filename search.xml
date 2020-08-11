@@ -4,6 +4,7 @@
     <title>EasyDown 学习记录</title>
     <url>/EasyDown.html</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
+<p>素材是UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p>
 <a id="more"></a>
 
 <h2 id="背景移动的实现"><a href="#背景移动的实现" class="headerlink" title="背景移动的实现"></a>背景移动的实现</h2><h3 id="脚本控制Material的Offset"><a href="#脚本控制Material的Offset" class="headerlink" title="脚本控制Material的Offset"></a>脚本控制Material的Offset</h3><h4 id="1-脚本获取Quard的Material"><a href="#1-脚本获取Quard的Material" class="headerlink" title="1.脚本获取Quard的Material"></a>1.脚本获取Quard的Material</h4><p>​    因为Quard上并没有Material的项目，而是通过Mesh Renderer调整材质，所以需要用：</p>
@@ -30,7 +31,20 @@ material.mainTextureOffset = movement;</code></pre>
 }</code></pre>
 <p><em>附：OnCollisionEnter和OnTriggerEnter的区别</em></p>
 <p><img src="/EasyDown/1.png" alt></p>
-<h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><p>​    通过Distance Joint实现摇摆功能</p>
+<h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><h4 id="1-摇摆"><a href="#1-摇摆" class="headerlink" title="1.摇摆"></a>1.摇摆</h4><p>​    通过Distance Joint实现摇摆功能</p>
+<h4 id="2-连线"><a href="#2-连线" class="headerlink" title="2.连线"></a>2.连线</h4><p>​    <del>可以用很多个Chain连接</del></p>
+<p>​    使用Line Renderer组件来画线，通过代码获取顶点位置并设置进组件</p>
+<p>​    <strong>缺点：虽然省了很多麻烦 但实在不美观</strong> 想要美化还需要制作新的Material</p>
+<pre><code class="line-numbers language-c#">LineRenderer line;
+public Transform startPoint;
+public Transform endPoint;
+
+//start:
+line = GetComponent&lt;LineRenderer&gt;();
+
+//update:
+line.SetPosition(0,startPoint.position);
+line.SetPosition(1, endPoint.position);</code></pre>
 <h3 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h3><h4 id="1-上升"><a href="#1-上升" class="headerlink" title="1.上升"></a>1.上升</h4><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start方法中传入Movement.y，在Update方法中调用MovePlatform方法。</p>
 <pre><code class="line-numbers language-c#">void MovePlatform()
 {

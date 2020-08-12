@@ -96,7 +96,8 @@ line.SetPosition(1, endPoint.position);</code></pre>
     }
 
 }</code></pre>
-<p>​        当然这里可以添加一些概率算法来辅助生成，降低偶然事件的发生概率</p>
+<p>​        当然这里可以添加一些概率算法来辅助生成，避免难度过高的平台连续生成等</p>
+<p>​        还可以调整Platform数组的各种类平台占比，来调整游戏难度，也可以随时间改变各种类平台的占比来调整难度等</p>
 <p>​        <em>附：最简单的控制方法</em></p>
 <pre><code class="line-numbers language-c#">if (index == 4) //控制铁球生成数目
 {

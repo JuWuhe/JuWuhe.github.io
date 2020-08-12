@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>EasyDown 学习记录</title>
+    <title>EasyDown</title>
     <url>/EasyDown.html</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
 <p>素材来自UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p>
@@ -60,6 +60,57 @@ line.SetPosition(1, endPoint.position);</code></pre>
 {
   Destroy(gameObject);
 }</code></pre>
+<h3 id="随机生成平台"><a href="#随机生成平台" class="headerlink" title="随机生成平台"></a>随机生成平台</h3><p>​        设置Empty为StartLine，既作平台生成点也作掉落死亡判断点（Tag设为尖刺）</p>
+<p>​        在代码中public 一个GameObject List，并在Unity中将Size调整为3 再通过Instantiate方法生成平台</p>
+<pre><code class="line-numbers language-c#">public class Spawner : MonoBehaviour
+{
+    public List&lt;GameObject&gt; platforms = new List&lt;GameObject&gt;();
+    //控制随机生成间隔时间
+    public float spawnTime; 
+    private float countTime;  
+    private Vector3 spawnPosition;
+
+    void Update()
+    {
+        SpawnPlatform();
+    }
+
+    public void SpawnPlatform()
+    {
+        countTime += Time.deltaTime;
+        spawnPosition = transform.position;
+        spawnPosition.x = Random.Range(-3f, 3f);  //具体数值具体调整
+
+        if(countTime &gt;= spawnTime)
+        {
+            CreatPlatform();
+            countTime = 0;
+        }
+
+    }
+
+    public void CreatPlatform()
+    {
+        int index = Random.Range(0, platforms.Count);
+        Instantiate(platforms[index], spawnPosition, Quaternion.identity);
+    }
+
+}</code></pre>
+<p>​        当然这里可以添加一些概率算法来辅助生成，降低偶然事件的发生概率</p>
+<p>​        <em>附：最简单的控制方法</em></p>
+<pre><code class="line-numbers language-c#">if (index == 4) //控制铁球生成数目
+{
+    spikeNum++;
+}
+if(spikeNum &gt; 1)
+{
+    spikeNum = 0;
+    countTime = spawnTime; //生成新平台
+    return; //跳过该次生成
+}</code></pre>
+<blockquote>
+<p><strong>随机生成平台这里还有个小bug，生成的铁球会被生成的平台卡住，但本游戏仅作练手和熟悉Unity操作用，就不进一步优化了</strong></p>
+</blockquote>
 <h2 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h2><div id="isOnGround"></div>
 
 <h3 id="站地检测"><a href="#站地检测" class="headerlink" title="站地检测"></a>站地检测</h3><p>​        通过Physics2D.OverlapCircle(vector2 point,float radius,int LayerMask)方法检测是否站地: 点、半径、图层，以地面检测点点为圆心作半径圆，检测地面图层</p>

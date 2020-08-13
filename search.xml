@@ -115,7 +115,7 @@ if(spikeNum &gt; 1)
     return; //跳过该次生成
 }</code></pre>
 <blockquote>
-<p>随机生成平台这里还有个<a href="More">小bug</a></p>
+<p>随机生成平台这里还有个<a href="#More">小bug</a></p>
 </blockquote>
 <h2 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h2><div id="isOnGround"></div>
 

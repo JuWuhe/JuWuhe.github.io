@@ -134,11 +134,11 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
         //如果使用DrawSphere则是实心的
         Gizmos.DrawWireSphere(groundCheck.transform.position, checkRadius);
     }</code></pre>
-<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><h4 id="计分"><a href="#计分" class="headerlink" title="计分"></a>计分</h4><p>​        为了避免重新游戏后 计分继上一次游戏续，需要使用timeSinceLevelLoad方法</p>
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><h3 id="计分"><a href="#计分" class="headerlink" title="计分"></a>计分</h3><p>​        为了避免重新游戏后 计分继上一次游戏续，需要使用timeSinceLevelLoad方法</p>
 <pre><code class="line-numbers language-c#">timeScore.text = Time.timeSinceLevelLoad.ToString(&quot;000&quot;);</code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="Bugs-amp-解决方法"><a href="#Bugs-amp-解决方法" class="headerlink" title="Bugs&amp;解决方法"></a>Bugs&amp;解决方法</h3><div id="More"></div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><div id="More"></div>
 
-<ul>
+<h3 id="Bugs-amp-解决方法"><a href="#Bugs-amp-解决方法" class="headerlink" title="Bugs&amp;解决方法"></a>Bugs&amp;解决方法</h3><ul>
 <li><p>由于在代码中使用的是OnTriggerEnter2D检测尖刺碰撞，而在铁球和Player都不为Trigger时是不能触发的，Player会将铁球弹开而不触发Spike的Tag结束游戏</p>
 <p><strong>解决方法</strong>：将铁球标为IsTrigger，此时Player将穿过铁球结束游戏且下面的问题也消失。</p>
 </li>

@@ -5,6 +5,13 @@
     <url>/EasyDown.html</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
 <p>素材来自UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p>
+<p>完结代码在<a href="https://github.com/JuWuhe/Down100Floors" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>Joint 2D 组件</li>
+<li>Line Renderer 组件</li>
+<li>Gizmos.Draw 可视化范围</li>
+<li>随机生成平台的方法</li>
+</ul>
 <a id="more"></a>
 
 <h2 id="背景移动的实现"><a href="#背景移动的实现" class="headerlink" title="背景移动的实现"></a>背景移动的实现</h2><h3 id="脚本控制Material的Offset"><a href="#脚本控制Material的Offset" class="headerlink" title="脚本控制Material的Offset"></a>脚本控制Material的Offset</h3><h4 id="1-脚本获取Quard的Material"><a href="#1-脚本获取Quard的Material" class="headerlink" title="1.脚本获取Quard的Material"></a>1.脚本获取Quard的Material</h4><p>​    因为Quard上并没有Material的项目，而是通过Mesh Renderer调整材质，所以需要用：</p>
@@ -32,8 +39,6 @@ material.mainTextureOffset = movement;</code></pre>
         rb.velocity = new Vector2(rb.velocity.x, 10f);
     }    
 }</code></pre>
-<p><em>附：OnCollisionEnter和OnTriggerEnter的区别</em></p>
-<p><img src="/EasyDown/1.png" alt></p>
 <h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><h4 id="1-摇摆"><a href="#1-摇摆" class="headerlink" title="1.摇摆"></a>1.摇摆</h4><p>​    通过Distance Joint实现摇摆功能</p>
 <h4 id="2-连线"><a href="#2-连线" class="headerlink" title="2.连线"></a>2.连线</h4><p>​    <del>可以用很多个Chain连接</del></p>
 <p>​    使用Line Renderer组件来画线，通过代码获取顶点位置并设置进组件</p>
@@ -110,7 +115,7 @@ if(spikeNum &gt; 1)
     return; //跳过该次生成
 }</code></pre>
 <blockquote>
-<p><strong>随机生成平台这里还有个小bug，生成的铁球会被生成的平台卡住，但本游戏仅作练手和熟悉Unity操作用，就不进一步优化了</strong></p>
+<p>随机生成平台这里还有个<a href="More">小bug</a></p>
 </blockquote>
 <h2 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h2><div id="isOnGround"></div>
 
@@ -129,6 +134,19 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
         //如果使用DrawSphere则是实心的
         Gizmos.DrawWireSphere(groundCheck.transform.position, checkRadius);
     }</code></pre>
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><h4 id="计分"><a href="#计分" class="headerlink" title="计分"></a>计分</h4><p>​        为了避免重新游戏后 计分继上一次游戏续，需要使用timeSinceLevelLoad方法</p>
+<pre><code class="line-numbers language-c#">timeScore.text = Time.timeSinceLevelLoad.ToString(&quot;000&quot;);</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="Bugs-amp-解决方法"><a href="#Bugs-amp-解决方法" class="headerlink" title="Bugs&amp;解决方法"></a>Bugs&amp;解决方法</h3><div id="More"></div>
+
+<ul>
+<li><p>由于在代码中使用的是OnTriggerEnter2D检测尖刺碰撞，而在铁球和Player都不为Trigger时是不能触发的，Player会将铁球弹开而不触发Spike的Tag结束游戏</p>
+<p><strong>解决方法</strong>：将铁球标为IsTrigger，此时Player将穿过铁球结束游戏且下面的问题也消失。</p>
+</li>
+<li><p>随机生成的铁球会卡在平台上</p>
+<p><strong>考虑的另一种解决方法</strong>：在Layer Collision Matrix取消Spike图层和Platform图层的碰撞，这样也可以将顶端尖刺的IsTrigger取消，让Player不会穿过尖刺继续向上，但在代码中要修改为OnCollisionEnter2D</p>
+</li>
+</ul>
+<h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h3><p><a href="https://connect.unity.com/p/unityru-men-kuai-su-zuo-yi-ge-shang-yin-de-xiao-you-xi" target="_blank" rel="noopener">Michael-Connect</a></p>
 ]]></content>
       <categories>
         <category>Unity</category>

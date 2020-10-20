@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://insyent.today/"/>
-  <updated>2020-08-14T00:35:13.853Z</updated>
+  <updated>2020-10-20T12:33:25.017Z</updated>
   <id>http://insyent.today/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RobbiePlatform学习记录</title>
+    <link href="http://insyent.today/RobbiePlatform.html"/>
+    <id>http://insyent.today/RobbiePlatform.html</id>
+    <published>2020-10-20T12:31:54.000Z</published>
+    <updated>2020-10-20T12:33:25.017Z</updated>
+    
+    <content type="html"><![CDATA[<p>还没开始，先把文件夹建好了</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;还没开始，先把文件夹建好了&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Unity" scheme="http://insyent.today/categories/Unity/"/>
+    
+      <category term="学习" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="2D" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/2D/"/>
+    
+    
+      <category term="学习" scheme="http://insyent.today/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>EasyDown学习记录</title>

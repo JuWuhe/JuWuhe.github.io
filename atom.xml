@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://insyent.today/"/>
-  <updated>2020-10-20T12:33:25.017Z</updated>
+  <updated>2020-11-06T05:59:53.748Z</updated>
   <id>http://insyent.today/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>n &amp;= (n-1);</title>
+    <link href="http://insyent.today/BitNn.html"/>
+    <id>http://insyent.today/BitNn.html</id>
+    <published>2020-11-06T05:42:33.000Z</published>
+    <updated>2020-11-06T05:59:53.748Z</updated>
+    
+    <content type="html"><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p><a id="more"></a><h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>将n的二进制表示中的最低位为1的改为0</p><p>大概举个例子就是：</p><pre><code class="line-numbers language-c++">int n = 20; //2进制即为 10100// n-1= 19    2进制即为 10011n &amp;= (n - 1);cout &lt;&lt; n &lt;&lt; endl; //输出结果为16 二进制为10000</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="判断一个数是否是2的方幂"><a href="#判断一个数是否是2的方幂" class="headerlink" title="判断一个数是否是2的方幂"></a>判断一个数是否是2的方幂</h2><pre><code class="line-numbers language-c++">n &gt; 0 &amp;&amp; ((n &amp; (n - 1)) == 0 )</code></pre><p>即 n二进制下只有一位是1</p><h2 id="统计二进制表示中1的个数"><a href="#统计二进制表示中1的个数" class="headerlink" title="统计二进制表示中1的个数"></a>统计二进制表示中1的个数</h2><pre><code class="line-numbers language-c++">int count = 0;while(n) {    n &amp;= (n -1);    count++;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;​         今天Leetcode的题是&lt;a href=&quot;https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;根据数字二进制下 1 的数目排序&lt;/a&gt;，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp;amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://insyent.today/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="学习" scheme="http://insyent.today/categories/%E7%AE%97%E6%B3%95/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="位运算" scheme="http://insyent.today/categories/%E7%AE%97%E6%B3%95/%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+    
+      <category term="学习" scheme="http://insyent.today/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>RobbiePlatform学习记录</title>

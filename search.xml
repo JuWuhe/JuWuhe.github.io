@@ -154,7 +154,7 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
         <category>2D</category>
       </categories>
       <tags>
-        <tag>学习</tag>
+        <tag>游戏开发</tag>
       </tags>
   </entry>
   <entry>
@@ -168,7 +168,7 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
         <category>2D</category>
       </categories>
       <tags>
-        <tag>学习</tag>
+        <tag>游戏开发</tag>
       </tags>
   </entry>
   <entry>
@@ -193,13 +193,12 @@ while(n)
 }</code></pre>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>LeetCode</category>
         <category>学习</category>
         <category>位运算</category>
-        <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>

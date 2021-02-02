@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://insyent.today/"/>
-  <updated>2020-11-08T13:35:26.334Z</updated>
+  <updated>2021-02-02T09:22:09.125Z</updated>
   <id>http://insyent.today/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GlobalGameJam2021 学习记录</title>
+    <link href="http://insyent.today/GGJ2021.html"/>
+    <id>http://insyent.today/GGJ2021.html</id>
+    <published>2021-02-02T09:13:56.000Z</published>
+    <updated>2021-02-02T09:22:09.125Z</updated>
+    
+    <content type="html"><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p><ul><li>UI Manager</li><li>Scene Manager</li></ul><a id="more"></a><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p><a href="https://www.bilibili.com/video/BV1Bz4y1D7rL" target="_blank" rel="noopener">友人aa - [Unity编程]这大概是最好理解的UI框架了吧</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UI Manager&lt;/li&gt;
+&lt;li&gt;Scene Manager&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Unity" scheme="http://insyent.today/categories/Unity/"/>
+    
+      <category term="学习" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="C#" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/C/"/>
+    
+    
+      <category term="游戏开发" scheme="http://insyent.today/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>n &amp;= (n-1);</title>
@@ -48,13 +79,13 @@
     <link href="http://insyent.today/RobbiePlatform.html"/>
     <id>http://insyent.today/RobbiePlatform.html</id>
     <published>2020-10-20T12:31:54.000Z</published>
-    <updated>2020-11-09T13:06:44.311Z</updated>
+    <updated>2021-02-02T09:15:49.471Z</updated>
     
-    <content type="html"><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p><p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p><p>完结代码在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p><ul><li>Rule Tile</li><li></li></ul><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p><p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p><p>完结代码在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p><ul><li>Rule Tile</li><li></li></ul><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;基于Unity的平台2D小游戏，学习于steam的&lt;a href=&quot;https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Robbie Swifthand and the Orb of Mysteries&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;基于Unity的平台2D小游戏，学习于steam上的&lt;a href=&quot;https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Robbie Swifthand and the Orb of Mysteries&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;素材来自该游戏公司公开的免费的&lt;a href=&quot;https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;素材&lt;/a&gt;，提取码：a338&lt;/p&gt;
 &lt;p&gt;完结代码在&lt;a href=&quot;https://github.com/JuWuhe/RobbiePlatform&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;

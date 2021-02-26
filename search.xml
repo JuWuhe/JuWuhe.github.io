@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>状态压缩位运算 &amp; 求二进制子集</title>
-    <url>/BitNn2.html</url>
+    <url>/BitNn2</url>
     <content><![CDATA[<p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p>
 <a id="more"></a>
 
@@ -31,7 +31,7 @@
   </entry>
   <entry>
     <title>EasyDown学习记录</title>
-    <url>/EasyDown.html</url>
+    <url>/EasyDown</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
 <p>素材来自UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p>
 <p>完结代码在<a href="https://github.com/JuWuhe/Down100Floors" target="_blank" rel="noopener">Github</a></p>
@@ -187,60 +187,8 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
       </tags>
   </entry>
   <entry>
-    <title>RobbiePlatform学习记录</title>
-    <url>/RobbiePlatform.html</url>
-    <content><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
-<p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
-<p>完结代码在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
-<ul>
-<li>Rule Tile</li>
-<li></li>
-</ul>
-<a id="more"></a>
-
-]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>2D</category>
-      </categories>
-      <tags>
-        <tag>游戏开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>n &amp;= (n-1);</title>
-    <url>/BitNn.html</url>
-    <content><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p>
-<a id="more"></a>
-
-<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>将n的二进制表示中的最低位为1的改为0</p>
-<p>大概举个例子就是：</p>
-<pre><code class="line-numbers language-c++">int n = 20; //2进制即为 10100
-// n-1= 19    2进制即为 10011
-n &amp;= (n - 1);
-cout &lt;&lt; n &lt;&lt; endl; //输出结果为16 二进制为10000</code></pre>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="判断一个数是否是2的方幂"><a href="#判断一个数是否是2的方幂" class="headerlink" title="判断一个数是否是2的方幂"></a>判断一个数是否是2的方幂</h2><pre><code class="line-numbers language-c++">n &gt; 0 &amp;&amp; ((n &amp; (n - 1)) == 0 )</code></pre>
-<p>即 n二进制下只有一位是1</p>
-<h2 id="统计二进制表示中1的个数"><a href="#统计二进制表示中1的个数" class="headerlink" title="统计二进制表示中1的个数"></a>统计二进制表示中1的个数</h2><pre><code class="line-numbers language-c++">int count = 0;
-while(n) 
-{
-    n &amp;= (n -1);
-    count++;
-}</code></pre>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>学习</category>
-        <category>位运算</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>GlobalGameJam2021 学习记录</title>
-    <url>/GGJ2021.html</url>
+    <url>/GGJ2021</url>
     <content><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p>
 <p>完结代码放在Github上(还没放呢)</p>
 <ul>
@@ -372,6 +320,58 @@ public class StartScene : SceneState
       </categories>
       <tags>
         <tag>游戏开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RobbiePlatform学习记录</title>
+    <url>/RobbiePlatform</url>
+    <content><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
+<p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
+<p>完结代码在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>Rule Tile</li>
+<li></li>
+</ul>
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>学习</category>
+        <category>2D</category>
+      </categories>
+      <tags>
+        <tag>游戏开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>n &amp;= (n-1);</title>
+    <url>/BitNn</url>
+    <content><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p>
+<a id="more"></a>
+
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>将n的二进制表示中的最低位为1的改为0</p>
+<p>大概举个例子就是：</p>
+<pre><code class="line-numbers language-c++">int n = 20; //2进制即为 10100
+// n-1= 19    2进制即为 10011
+n &amp;= (n - 1);
+cout &lt;&lt; n &lt;&lt; endl; //输出结果为16 二进制为10000</code></pre>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="判断一个数是否是2的方幂"><a href="#判断一个数是否是2的方幂" class="headerlink" title="判断一个数是否是2的方幂"></a>判断一个数是否是2的方幂</h2><pre><code class="line-numbers language-c++">n &gt; 0 &amp;&amp; ((n &amp; (n - 1)) == 0 )</code></pre>
+<p>即 n二进制下只有一位是1</p>
+<h2 id="统计二进制表示中1的个数"><a href="#统计二进制表示中1的个数" class="headerlink" title="统计二进制表示中1的个数"></a>统计二进制表示中1的个数</h2><pre><code class="line-numbers language-c++">int count = 0;
+while(n) 
+{
+    n &amp;= (n -1);
+    count++;
+}</code></pre>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+        <category>学习</category>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>

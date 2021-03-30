@@ -190,7 +190,7 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
     <title>GlobalGameJam2021 学习记录</title>
     <url>/GGJ2021</url>
     <content><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p>
-<p>完结代码放在Github上(还没放呢)</p>
+<p>完结代码放在<a href="https://github.com/JuWuhe/GGJLearn_UIManager" target="_blank" rel="noopener">Github</a>上</p>
 <ul>
 <li>UI框架</li>
 <li>SceneManager框架</li>

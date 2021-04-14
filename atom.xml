@@ -107,18 +107,19 @@
     <link href="http://insyent.today/RobbiePlatform"/>
     <id>http://insyent.today/RobbiePlatform</id>
     <published>2020-10-20T12:31:54.000Z</published>
-    <updated>2021-02-02T09:15:49.471Z</updated>
+    <updated>2021-04-14T15:14:37.995Z</updated>
     
-    <content type="html"><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p><p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p><p>完结代码在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p><ul><li>Rule Tile</li><li></li></ul><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p><p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p><p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p><ul><li>Rule Tile</li><li>Tilemap Collider 2D</li><li>Unity代码整理技巧 Header等</li></ul><a id="more"></a><h1 id="Tilemap-Collider-2D"><a href="#Tilemap-Collider-2D" class="headerlink" title="Tilemap Collider 2D"></a>Tilemap Collider 2D</h1><p>​        Used By Composite 可以使用复合式的Collider，避免角色在不同贴片之间被Collider卡住。但是需要添加一个Composite Collider 2D组件。此时对于该TileMap的Collider已经变成整体，对于后续添加的贴片，会直接在该碰撞器本身添加范围，一直保持为一个整体的Collider。</p><blockquote><p>需留意的是在自动添加的Rigidbody2D中的重力属性，不希望下落需设置为0或者将Object设置为static</p></blockquote><h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;基于Unity的平台2D小游戏，学习于steam上的&lt;a href=&quot;https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Robbie Swifthand and the Orb of Mysteries&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;素材来自该游戏公司公开的免费的&lt;a href=&quot;https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;素材&lt;/a&gt;，提取码：a338&lt;/p&gt;
-&lt;p&gt;完结代码在&lt;a href=&quot;https://github.com/JuWuhe/RobbiePlatform&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;完结工程在&lt;a href=&quot;https://github.com/JuWuhe/RobbiePlatform&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Rule Tile&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;Tilemap Collider 2D&lt;/li&gt;
+&lt;li&gt;Unity代码整理技巧 Header等&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>

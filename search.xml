@@ -1,199 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>GlobalGameJam2021 学习记录</title>
-    <url>/GGJ2021/</url>
-    <content><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p>
-<p>完结代码放在<a href="https://github.com/JuWuhe/GGJLearn_UIManager" target="_blank" rel="noopener">Github</a>上</p>
-<ul>
-<li>UI框架</li>
-<li>SceneManager框架</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="UI框架"><a href="#UI框架" class="headerlink" title="UI框架"></a>UI框架</h1><h2 id="UIType类"><a href="#UIType类" class="headerlink" title="UIType类"></a>UIType类</h2><p>包含Name和Path两个属性，即该UI的名字和Prefabs的相对路径</p>
-<blockquote>
-<p>因为在UIManager类中，用了Resources.Load方法，因此Path应该是<strong>保存在Resources文件夹</strong>下的Prefabs的相对路径</p>
-</blockquote>
-<h2 id="BasePanel类"><a href="#BasePanel类" class="headerlink" title="BasePanel类"></a>BasePanel类</h2><p>所有UIPanel类的父类，是一个抽象类</p>
-<p>有管理进入操作、暂停操作、继续操作、退出操作的方法</p>
-<blockquote>
-<p>举例：当设置界面弹出时，主界面上的按钮应该失去点击效果，因此需要暂停和继续操作</p>
-</blockquote>
-<h2 id="UIManager类"><a href="#UIManager类" class="headerlink" title="UIManager类"></a>UIManager类</h2><p>管理所有UI信息，和所有UI的创建、销毁</p>
-<h3 id="存储UI信息"><a href="#存储UI信息" class="headerlink" title="存储UI信息"></a>存储UI信息</h3><pre><code class="line-numbers language-c#">private Dictionary&lt;UIType, GameObject&gt; dicUI;</code></pre>
-<h2 id="PanelManager类"><a href="#PanelManager类" class="headerlink" title="PanelManager类"></a>PanelManager类</h2><p>Panel管理器，采用栈存储UIPanel，入栈即显示该Panel，栈顶元素即为当前最前界面，非栈顶元素处于暂停状态</p>
-<h2 id="UI-Tool-类"><a href="#UI-Tool-类" class="headerlink" title="UI Tool 类"></a>UI Tool 类</h2><p>管理UI，获取子组件、子对象组件</p>
-<h3 id="获取或添加一个组件"><a href="#获取或添加一个组件" class="headerlink" title="获取或添加一个组件"></a>获取或添加一个组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponent&lt;T&gt;() where T : Component
-{
-    //T：组件类型
-    if (activePanel.GetComponent&lt;T&gt;() == null)
-    {
-        activePanel.AddComponent&lt;T&gt;();
-    }
-
-    return activePanel.GetComponent&lt;T&gt;();
-}</code></pre>
-<h3 id="获取子对象"><a href="#获取子对象" class="headerlink" title="获取子对象"></a>获取子对象</h3><pre><code class="line-numbers language-C#">public GameObject FindChildGameObject(string name)
-{
-    //name：子对象名称
-    Transform[] trans = activePanel.GetComponentsInChildren&lt;Transform&gt;();
-
-    foreach (Transform item in trans)
-    {
-        if (item.name == name)
-        {
-            return item.gameObject;
-        }
-    }
-    Debug.LogWarning($&quot;{activePanel.name}里没有{name}&quot;);
-    return null;
-}</code></pre>
-<h3 id="获取子对象的组件"><a href="#获取子对象的组件" class="headerlink" title="获取子对象的组件"></a>获取子对象的组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponentInChildren&lt;T&gt;(string name) where T : Component
-{
-    GameObject child = FindChildGameObject(name);
-    if (child)
-    {
-        if (child.GetComponent&lt;T&gt;() == null)
-        {
-            child.AddComponent&lt;T&gt;();
-        }
-
-        return child.GetComponent&lt;T&gt;();
-    }
-
-    return null;
-}</code></pre>
-<h2 id="具体Panel类的创建"><a href="#具体Panel类的创建" class="headerlink" title="具体Panel类的创建"></a>具体Panel类的创建</h2><p>继承BasePanel类，并将相对路径传入构造函数、重写方法</p>
-<p>并且在OnEnter方法中通过UITool类中实现的方法获取Button子对象的Button组件来实现添加onClik监听器</p>
-<pre><code class="line-numbers language-c#">UITool.GetOrAddComponentInChildren&lt;Button&gt;(&quot;ButtonName&quot;).onClick.AddListener(() =&gt;
-{
-    //点击事件
-});</code></pre>
-<h1 id="SceneManager"><a href="#SceneManager" class="headerlink" title="SceneManager"></a>SceneManager</h1><h2 id="SceneState类"><a href="#SceneState类" class="headerlink" title="SceneState类"></a>SceneState类</h2><p>场景状态，抽象类，有OnEnter方法和OnExit方法，分别是进入执行的操作和退出执行的操作</p>
-<h2 id="SceneSystem类"><a href="#SceneSystem类" class="headerlink" title="SceneSystem类"></a>SceneSystem类</h2><p>场景状态管理</p>
-<pre><code class="line-numbers language-c#">private SceneState sceneState;
-
-//设置当前场景，并进入当前场景
-public void SetScene(SceneState state)
-{
-    sceneState?.OnExit();
-    sceneState = state;
-    sceneState?.OnEnter();
-}</code></pre>
-<p><a href="#?.">“?.”是什么？</a></p>
-<h2 id="具体Scene类的创建"><a href="#具体Scene类的创建" class="headerlink" title="具体Scene类的创建"></a>具体Scene类的创建</h2><p>继承SceneState类，重写OnEnter和OnExit方法</p>
-<p>并用PanelManager生成该场景初始UI面板</p>
-<pre><code class="line-numbers language-c#">// 开始场景
-public class StartScene : SceneState
-{
-    private readonly string sceneName = &quot;Start&quot;;
-    private PanelManager panelManager;
-
-    public override void OnEnter()
-    {
-        panelManager = new PanelManager();
-        if (SceneManager.GetActiveScene().name != sceneName)
-        {
-            SceneManager.LoadScene(sceneName);
-            SceneManager.sceneLoaded += SceneLoaded;
-        }
-        else
-        {
-            panelManager.Push(new StartPanel());
-        }
-    }
-
-    public override void OnExit()
-    {
-        SceneManager.sceneLoaded -= SceneLoaded;
-    }
-
-    // 场景加载完毕之后执行
-    private void SceneLoaded(Scene scene, LoadSceneMode load)
-    {
-        panelManager.Push(new StartPanel());
-    }
-}</code></pre>
-<h1 id="GameRoot类"><a href="#GameRoot类" class="headerlink" title="GameRoot类"></a>GameRoot类</h1><p>管理全局的一些东西，例如场景切换，需要绑定在Object上</p>
-<p>采用单例模式</p>
-<p>例：游戏开始时展示Start场景</p>
-<pre><code class="line-numbers language-c#">private void Start()
-{
-    SceneSystem.SetScene(new StartScene());
-}</code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p><a href="https://www.bilibili.com/video/BV1Bz4y1D7rL" target="_blank" rel="noopener">友人aa - [Unity编程]这大概是最好理解的UI框架了吧</a></p>
-<div id="?."></div>
-
-<p><a href="https://www.cnblogs.com/niyl/p/12987610.html" target="_blank" rel="noopener">C#中 ??、 ?、 ?: 、?.、?[]</a></p>
-]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>C#</category>
-      </categories>
-      <tags>
-        <tag>游戏开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RobbiePlatform学习记录</title>
-    <url>/RobbiePlatform/</url>
-    <content><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
-<p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
-<p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
-<ul>
-<li>Rule Tile</li>
-<li>Tilemap Collider 2D</li>
-<li>Unity代码整理技巧 Header等</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Tilemap-Collider-2D"><a href="#Tilemap-Collider-2D" class="headerlink" title="Tilemap Collider 2D"></a>Tilemap Collider 2D</h1><p>​        Used By Composite 可以使用复合式的Collider，避免角色在不同贴片之间被Collider卡住。但是需要添加一个Composite Collider 2D组件。此时对于该TileMap的Collider已经变成整体，对于后续添加的贴片，会直接在该碰撞器本身添加范围，一直保持为一个整体的Collider。</p>
-<blockquote>
-<p>需留意的是在自动添加的Rigidbody2D中的重力属性，不希望下落需设置为0或者将Object设置为static</p>
-</blockquote>
-<h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>
-]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>2D</category>
-      </categories>
-      <tags>
-        <tag>游戏开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>状态压缩位运算 &amp; 求二进制子集</title>
-    <url>/BitNn2/</url>
-    <content><![CDATA[<p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p>
-<a id="more"></a>
-
-<h1 id="状态压缩的位运算"><a href="#状态压缩的位运算" class="headerlink" title="状态压缩的位运算"></a>状态压缩的位运算</h1><p>​        对于一个只有小写字母的string，可以将其压缩成一个长度为26的int。如果对每个字母出现次数没有更多要求，可以用”0”和”1”来表示该位字母未出现与出现。采用下面这种位运算：</p>
-<pre><code class="line-numbers language-C++">    string word = &quot;bcf&quot;
-    int index = 0;
-    for(char ch:word){
-        index |= 1 &lt;&lt; (ch - &#39;a&#39;); // &lt;&lt;为左移，低位用0补足  |为按位或运算
-    }</code></pre>
-<p>运行完毕后 index 便是100110，从右向左分别对应abcd…是否出现</p>
-<h1 id="求二进制的子集"><a href="#求二进制的子集" class="headerlink" title="求二进制的子集"></a>求二进制的子集</h1><p>​        针对中的二进制为1的位开始进行减法，判断数字k的二进制子集，减法有点类似于<a href="https://insyent.today/BitNn.html">n&amp;(n-1)</a>。</p>
-<pre><code class="line-numbers language-C++">    int sub = k;
-    do{
-        sub = (sub - 1) &amp; k;
-    } while(sub != k);</code></pre>
-<p>比如k = 10101的二进制子集有：10101、10100、10001、10000、00101、00100、00001、00000</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>学习</category>
-        <category>位运算</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>EasyDown学习记录</title>
     <url>/EasyDown/</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
@@ -351,6 +158,63 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
       </tags>
   </entry>
   <entry>
+    <title>状态压缩位运算 &amp; 求二进制子集</title>
+    <url>/BitNn2/</url>
+    <content><![CDATA[<p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p>
+<a id="more"></a>
+
+<h1 id="状态压缩的位运算"><a href="#状态压缩的位运算" class="headerlink" title="状态压缩的位运算"></a>状态压缩的位运算</h1><p>​        对于一个只有小写字母的string，可以将其压缩成一个长度为26的int。如果对每个字母出现次数没有更多要求，可以用”0”和”1”来表示该位字母未出现与出现。采用下面这种位运算：</p>
+<pre><code class="line-numbers language-C++">    string word = &quot;bcf&quot;
+    int index = 0;
+    for(char ch:word){
+        index |= 1 &lt;&lt; (ch - &#39;a&#39;); // &lt;&lt;为左移，低位用0补足  |为按位或运算
+    }</code></pre>
+<p>运行完毕后 index 便是100110，从右向左分别对应abcd…是否出现</p>
+<h1 id="求二进制的子集"><a href="#求二进制的子集" class="headerlink" title="求二进制的子集"></a>求二进制的子集</h1><p>​        针对中的二进制为1的位开始进行减法，判断数字k的二进制子集，减法有点类似于<a href="https://insyent.today/BitNn.html">n&amp;(n-1)</a>。</p>
+<pre><code class="line-numbers language-C++">    int sub = k;
+    do{
+        sub = (sub - 1) &amp; k;
+    } while(sub != k);</code></pre>
+<p>比如k = 10101的二进制子集有：10101、10100、10001、10000、00101、00100、00001、00000</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+        <category>学习</category>
+        <category>位运算</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RobbiePlatform学习记录</title>
+    <url>/RobbiePlatform/</url>
+    <content><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
+<p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
+<p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>Rule Tile</li>
+<li>Tilemap Collider 2D</li>
+<li>Unity代码整理技巧 Header等</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Tilemap-Collider-2D"><a href="#Tilemap-Collider-2D" class="headerlink" title="Tilemap Collider 2D"></a>Tilemap Collider 2D</h1><p>​        Used By Composite 可以使用复合式的Collider，避免角色在不同贴片之间被Collider卡住。但是需要添加一个Composite Collider 2D组件。此时对于该TileMap的Collider已经变成整体，对于后续添加的贴片，会直接在该碰撞器本身添加范围，一直保持为一个整体的Collider。</p>
+<blockquote>
+<p>需留意的是在自动添加的Rigidbody2D中的重力属性，不希望下落需设置为0或者将Object设置为static</p>
+</blockquote>
+<h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>学习</category>
+        <category>2D</category>
+      </categories>
+      <tags>
+        <tag>游戏开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>n &amp;= (n-1);</title>
     <url>/BitNn/</url>
     <content><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p>
@@ -378,6 +242,142 @@ while(n)
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GlobalGameJam2021 学习记录</title>
+    <url>/GGJ2021/</url>
+    <content><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p>
+<p>完结代码放在<a href="https://github.com/JuWuhe/GGJLearn_UIManager" target="_blank" rel="noopener">Github</a>上</p>
+<ul>
+<li>UI框架</li>
+<li>SceneManager框架</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="UI框架"><a href="#UI框架" class="headerlink" title="UI框架"></a>UI框架</h1><h2 id="UIType类"><a href="#UIType类" class="headerlink" title="UIType类"></a>UIType类</h2><p>包含Name和Path两个属性，即该UI的名字和Prefabs的相对路径</p>
+<blockquote>
+<p>因为在UIManager类中，用了Resources.Load方法，因此Path应该是<strong>保存在Resources文件夹</strong>下的Prefabs的相对路径</p>
+</blockquote>
+<h2 id="BasePanel类"><a href="#BasePanel类" class="headerlink" title="BasePanel类"></a>BasePanel类</h2><p>所有UIPanel类的父类，是一个抽象类</p>
+<p>有管理进入操作、暂停操作、继续操作、退出操作的方法</p>
+<blockquote>
+<p>举例：当设置界面弹出时，主界面上的按钮应该失去点击效果，因此需要暂停和继续操作</p>
+</blockquote>
+<h2 id="UIManager类"><a href="#UIManager类" class="headerlink" title="UIManager类"></a>UIManager类</h2><p>管理所有UI信息，和所有UI的创建、销毁</p>
+<h3 id="存储UI信息"><a href="#存储UI信息" class="headerlink" title="存储UI信息"></a>存储UI信息</h3><pre><code class="line-numbers language-c#">private Dictionary&lt;UIType, GameObject&gt; dicUI;</code></pre>
+<h2 id="PanelManager类"><a href="#PanelManager类" class="headerlink" title="PanelManager类"></a>PanelManager类</h2><p>Panel管理器，采用栈存储UIPanel，入栈即显示该Panel，栈顶元素即为当前最前界面，非栈顶元素处于暂停状态</p>
+<h2 id="UI-Tool-类"><a href="#UI-Tool-类" class="headerlink" title="UI Tool 类"></a>UI Tool 类</h2><p>管理UI，获取子组件、子对象组件</p>
+<h3 id="获取或添加一个组件"><a href="#获取或添加一个组件" class="headerlink" title="获取或添加一个组件"></a>获取或添加一个组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponent&lt;T&gt;() where T : Component
+{
+    //T：组件类型
+    if (activePanel.GetComponent&lt;T&gt;() == null)
+    {
+        activePanel.AddComponent&lt;T&gt;();
+    }
+
+    return activePanel.GetComponent&lt;T&gt;();
+}</code></pre>
+<h3 id="获取子对象"><a href="#获取子对象" class="headerlink" title="获取子对象"></a>获取子对象</h3><pre><code class="line-numbers language-C#">public GameObject FindChildGameObject(string name)
+{
+    //name：子对象名称
+    Transform[] trans = activePanel.GetComponentsInChildren&lt;Transform&gt;();
+
+    foreach (Transform item in trans)
+    {
+        if (item.name == name)
+        {
+            return item.gameObject;
+        }
+    }
+    Debug.LogWarning($&quot;{activePanel.name}里没有{name}&quot;);
+    return null;
+}</code></pre>
+<h3 id="获取子对象的组件"><a href="#获取子对象的组件" class="headerlink" title="获取子对象的组件"></a>获取子对象的组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponentInChildren&lt;T&gt;(string name) where T : Component
+{
+    GameObject child = FindChildGameObject(name);
+    if (child)
+    {
+        if (child.GetComponent&lt;T&gt;() == null)
+        {
+            child.AddComponent&lt;T&gt;();
+        }
+
+        return child.GetComponent&lt;T&gt;();
+    }
+
+    return null;
+}</code></pre>
+<h2 id="具体Panel类的创建"><a href="#具体Panel类的创建" class="headerlink" title="具体Panel类的创建"></a>具体Panel类的创建</h2><p>继承BasePanel类，并将相对路径传入构造函数、重写方法</p>
+<p>并且在OnEnter方法中通过UITool类中实现的方法获取Button子对象的Button组件来实现添加onClik监听器</p>
+<pre><code class="line-numbers language-c#">UITool.GetOrAddComponentInChildren&lt;Button&gt;(&quot;ButtonName&quot;).onClick.AddListener(() =&gt;
+{
+    //点击事件
+});</code></pre>
+<h1 id="SceneManager"><a href="#SceneManager" class="headerlink" title="SceneManager"></a>SceneManager</h1><h2 id="SceneState类"><a href="#SceneState类" class="headerlink" title="SceneState类"></a>SceneState类</h2><p>场景状态，抽象类，有OnEnter方法和OnExit方法，分别是进入执行的操作和退出执行的操作</p>
+<h2 id="SceneSystem类"><a href="#SceneSystem类" class="headerlink" title="SceneSystem类"></a>SceneSystem类</h2><p>场景状态管理</p>
+<pre><code class="line-numbers language-c#">private SceneState sceneState;
+
+//设置当前场景，并进入当前场景
+public void SetScene(SceneState state)
+{
+    sceneState?.OnExit();
+    sceneState = state;
+    sceneState?.OnEnter();
+}</code></pre>
+<p><a href="#?.">“?.”是什么？</a></p>
+<h2 id="具体Scene类的创建"><a href="#具体Scene类的创建" class="headerlink" title="具体Scene类的创建"></a>具体Scene类的创建</h2><p>继承SceneState类，重写OnEnter和OnExit方法</p>
+<p>并用PanelManager生成该场景初始UI面板</p>
+<pre><code class="line-numbers language-c#">// 开始场景
+public class StartScene : SceneState
+{
+    private readonly string sceneName = &quot;Start&quot;;
+    private PanelManager panelManager;
+
+    public override void OnEnter()
+    {
+        panelManager = new PanelManager();
+        if (SceneManager.GetActiveScene().name != sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+            SceneManager.sceneLoaded += SceneLoaded;
+        }
+        else
+        {
+            panelManager.Push(new StartPanel());
+        }
+    }
+
+    public override void OnExit()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    // 场景加载完毕之后执行
+    private void SceneLoaded(Scene scene, LoadSceneMode load)
+    {
+        panelManager.Push(new StartPanel());
+    }
+}</code></pre>
+<h1 id="GameRoot类"><a href="#GameRoot类" class="headerlink" title="GameRoot类"></a>GameRoot类</h1><p>管理全局的一些东西，例如场景切换，需要绑定在Object上</p>
+<p>采用单例模式</p>
+<p>例：游戏开始时展示Start场景</p>
+<pre><code class="line-numbers language-c#">private void Start()
+{
+    SceneSystem.SetScene(new StartScene());
+}</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p><a href="https://www.bilibili.com/video/BV1Bz4y1D7rL" target="_blank" rel="noopener">友人aa - [Unity编程]这大概是最好理解的UI框架了吧</a></p>
+<div id="?."></div>
+
+<p><a href="https://www.cnblogs.com/niyl/p/12987610.html" target="_blank" rel="noopener">C#中 ??、 ?、 ?: 、?.、?[]</a></p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+        <category>学习</category>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>游戏开发</tag>
       </tags>
   </entry>
 </search>

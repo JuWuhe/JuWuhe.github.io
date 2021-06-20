@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>状态压缩位运算 &amp; 求二进制子集</title>
-    <url>/BitNn2</url>
+    <url>/BitNn2/</url>
     <content><![CDATA[<p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p>
 <a id="more"></a>
 
@@ -31,7 +31,7 @@
   </entry>
   <entry>
     <title>GlobalGameJam2021 学习记录</title>
-    <url>/GGJ2021</url>
+    <url>/GGJ2021/</url>
     <content><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p>
 <p>完结代码放在<a href="https://github.com/JuWuhe/GGJLearn_UIManager" target="_blank" rel="noopener">Github</a>上</p>
 <ul>
@@ -167,7 +167,7 @@ public class StartScene : SceneState
   </entry>
   <entry>
     <title>RobbiePlatform学习记录</title>
-    <url>/RobbiePlatform</url>
+    <url>/RobbiePlatform/</url>
     <content><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
 <p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
 <p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
@@ -195,7 +195,7 @@ public class StartScene : SceneState
   </entry>
   <entry>
     <title>n &amp;= (n-1);</title>
-    <url>/BitNn</url>
+    <url>/BitNn/</url>
     <content><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p>
 <a id="more"></a>
 
@@ -225,7 +225,7 @@ while(n)
   </entry>
   <entry>
     <title>EasyDown学习记录</title>
-    <url>/EasyDown</url>
+    <url>/EasyDown/</url>
     <content><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p>
 <p>素材来自UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p>
 <p>完结代码在<a href="https://github.com/JuWuhe/Down100Floors" target="_blank" rel="noopener">Github</a></p>

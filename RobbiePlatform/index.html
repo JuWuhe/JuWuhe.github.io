@@ -23,20 +23,20 @@
 <link rel="stylesheet" href="/js/prism/prism.css">
 
 
-  <meta name="description" content="​         今天元宵节，Leetcode的题是猜字谜，学了点知识，记录一下">
+  <meta name="description" content="基于Unity的平台2D小游戏，学习于steam上的Robbie Swifthand and the Orb of Mysteries 素材来自该游戏公司公开的免费的素材，提取码：a338 完结工程在Github  Rule Tile Tilemap Collider 2D Unity代码整理技巧 Header等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="状态压缩位运算 &amp; 求二进制子集">
-<meta property="og:url" content="http://insyent.today/BitNn2">
+<meta property="og:title" content="RobbiePlatform学习记录">
+<meta property="og:url" content="http://insyent.today/RobbiePlatform/">
 <meta property="og:site_name" content="Insyent&#39;s Blog">
-<meta property="og:description" content="​         今天元宵节，Leetcode的题是猜字谜，学了点知识，记录一下">
+<meta property="og:description" content="基于Unity的平台2D小游戏，学习于steam上的Robbie Swifthand and the Orb of Mysteries 素材来自该游戏公司公开的免费的素材，提取码：a338 完结工程在Github  Rule Tile Tilemap Collider 2D Unity代码整理技巧 Header等">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-26T14:08:50.000Z">
-<meta property="article:modified_time" content="2021-02-26T14:22:40.986Z">
+<meta property="article:published_time" content="2020-10-20T12:31:54.000Z">
+<meta property="article:modified_time" content="2021-04-14T15:14:37.995Z">
 <meta property="article:author" content="Insyent  居无何">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="游戏开发">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://insyent.today/BitNn2">
+<link rel="canonical" href="http://insyent.today/RobbiePlatform/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>状态压缩位运算 & 求二进制子集 | Insyent's Blog</title>
+  <title>RobbiePlatform学习记录 | Insyent's Blog</title>
   
 
 
@@ -196,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://insyent.today/BitNn2">
+    <link itemprop="mainEntityOfPage" href="http://insyent.today/RobbiePlatform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -209,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          状态压缩位运算 & 求二进制子集
+          RobbiePlatform学习记录
         </h1>
 
         <div class="post-meta">
@@ -218,25 +218,31 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-02-26 22:08:50 / 修改时间：22:22:40" itemprop="dateCreated datePublished" datetime="2021-02-26T22:08:50+08:00">2021-02-26</time>
+              <time title="创建时间：2020-10-20 20:31:54" itemprop="dateCreated datePublished" datetime="2020-10-20T20:31:54+08:00">2020-10-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-14 23:14:37" itemprop="dateModified" datetime="2021-04-14T23:14:37+08:00">2021-04-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                  <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                  <a href="/categories/Unity/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">位运算</span></a>
+                  <a href="/categories/Unity/%E5%AD%A6%E4%B9%A0/2D/" itemprop="url" rel="index"><span itemprop="name">2D</span></a>
                 </span>
             </span>
 
@@ -251,22 +257,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p>
+        <p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p>
+<p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p>
+<p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>Rule Tile</li>
+<li>Tilemap Collider 2D</li>
+<li>Unity代码整理技巧 Header等</li>
+</ul>
 <a id="more"></a>
 
-<h1 id="状态压缩的位运算"><a href="#状态压缩的位运算" class="headerlink" title="状态压缩的位运算"></a>状态压缩的位运算</h1><p>​        对于一个只有小写字母的string，可以将其压缩成一个长度为26的int。如果对每个字母出现次数没有更多要求，可以用”0”和”1”来表示该位字母未出现与出现。采用下面这种位运算：</p>
-<pre><code class="line-numbers language-C++">    string word = &quot;bcf&quot;
-    int index = 0;
-    for(char ch:word){
-        index |= 1 &lt;&lt; (ch - &#39;a&#39;); // &lt;&lt;为左移，低位用0补足  |为按位或运算
-    }</code></pre>
-<p>运行完毕后 index 便是100110，从右向左分别对应abcd…是否出现</p>
-<h1 id="求二进制的子集"><a href="#求二进制的子集" class="headerlink" title="求二进制的子集"></a>求二进制的子集</h1><p>​        针对中的二进制为1的位开始进行减法，判断数字k的二进制子集，减法有点类似于<a href="https://insyent.today/BitNn.html">n&amp;(n-1)</a>。</p>
-<pre><code class="line-numbers language-C++">    int sub = k;
-    do{
-        sub = (sub - 1) &amp; k;
-    } while(sub != k);</code></pre>
-<p>比如k = 10101的二进制子集有：10101、10100、10001、10000、00101、00100、00001、00000</p>
+<h1 id="Tilemap-Collider-2D"><a href="#Tilemap-Collider-2D" class="headerlink" title="Tilemap Collider 2D"></a>Tilemap Collider 2D</h1><p>​        Used By Composite 可以使用复合式的Collider，避免角色在不同贴片之间被Collider卡住。但是需要添加一个Composite Collider 2D组件。此时对于该TileMap的Collider已经变成整体，对于后续添加的贴片，会直接在该碰撞器本身添加范围，一直保持为一个整体的Collider。</p>
+<blockquote>
+<p>需留意的是在自动添加的Rigidbody2D中的重力属性，不希望下落需设置为0或者将Object设置为static</p>
+</blockquote>
+<h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>
 
     </div>
 
@@ -277,7 +282,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+              <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i> 游戏开发</a>
           </div>
 
         
@@ -285,10 +290,13 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/GGJ2021" rel="next" title="GlobalGameJam2021 学习记录">
-      GlobalGameJam2021 学习记录 <i class="fa fa-chevron-right"></i>
+    <a href="/BitNn/" rel="prev" title="n &= (n-1);">
+      <i class="fa fa-chevron-left"></i> n &= (n-1);
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/EasyDown/" rel="next" title="EasyDown学习记录">
+      EasyDown学习记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -348,7 +356,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#状态压缩的位运算"><span class="nav-text">状态压缩的位运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求二进制的子集"><span class="nav-text">求二进制的子集</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tilemap-Collider-2D"><span class="nav-text">Tilemap Collider 2D</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码中的-Header-“text”"><span class="nav-text">代码中的[Header(“text”)]</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

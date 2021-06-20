@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://insyent.today/"/>
-  <updated>2021-02-26T14:22:40.986Z</updated>
+  <updated>2021-06-20T14:06:34.367Z</updated>
   <id>http://insyent.today/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://insyent.today/BitNn2/"/>
     <id>http://insyent.today/BitNn2/</id>
     <published>2021-02-26T14:08:50.000Z</published>
-    <updated>2021-02-26T14:22:40.986Z</updated>
+    <updated>2021-06-20T14:06:34.367Z</updated>
     
     <content type="html"><![CDATA[<p>​         今天元宵节，Leetcode的题是<a href="https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/" target="_blank" rel="noopener">猜字谜</a>，学了点知识，记录一下</p><a id="more"></a><h1 id="状态压缩的位运算"><a href="#状态压缩的位运算" class="headerlink" title="状态压缩的位运算"></a>状态压缩的位运算</h1><p>​        对于一个只有小写字母的string，可以将其压缩成一个长度为26的int。如果对每个字母出现次数没有更多要求，可以用”0”和”1”来表示该位字母未出现与出现。采用下面这种位运算：</p><pre><code class="line-numbers language-C++">    string word = &quot;bcf&quot;    int index = 0;    for(char ch:word){        index |= 1 &lt;&lt; (ch - &#39;a&#39;); // &lt;&lt;为左移，低位用0补足  |为按位或运算    }</code></pre><p>运行完毕后 index 便是100110，从右向左分别对应abcd…是否出现</p><h1 id="求二进制的子集"><a href="#求二进制的子集" class="headerlink" title="求二进制的子集"></a>求二进制的子集</h1><p>​        针对中的二进制为1的位开始进行减法，判断数字k的二进制子集，减法有点类似于<a href="https://insyent.today/BitNn.html">n&amp;(n-1)</a>。</p><pre><code class="line-numbers language-C++">    int sub = k;    do{        sub = (sub - 1) &amp; k;    } while(sub != k);</code></pre><p>比如k = 10101的二进制子集有：10101、10100、10001、10000、00101、00100、00001、00000</p>]]></content>
     
@@ -31,12 +31,6 @@
     
     </summary>
     
-    
-      <category term="LeetCode" scheme="http://insyent.today/categories/LeetCode/"/>
-    
-      <category term="学习" scheme="http://insyent.today/categories/LeetCode/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="位运算" scheme="http://insyent.today/categories/LeetCode/%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
     
       <category term="算法" scheme="http://insyent.today/tags/%E7%AE%97%E6%B3%95/"/>
@@ -48,7 +42,7 @@
     <link href="http://insyent.today/GGJ2021/"/>
     <id>http://insyent.today/GGJ2021/</id>
     <published>2021-02-02T09:13:56.000Z</published>
-    <updated>2021-03-30T14:54:55.767Z</updated>
+    <updated>2021-06-20T14:06:45.980Z</updated>
     
     <content type="html"><![CDATA[<p>一月底被大佬们带飞了GGJ2021，写了一点点代码，总结并学习一下</p><p>完结代码放在<a href="https://github.com/JuWuhe/GGJLearn_UIManager" target="_blank" rel="noopener">Github</a>上</p><ul><li>UI框架</li><li>SceneManager框架</li></ul><a id="more"></a><h1 id="UI框架"><a href="#UI框架" class="headerlink" title="UI框架"></a>UI框架</h1><h2 id="UIType类"><a href="#UIType类" class="headerlink" title="UIType类"></a>UIType类</h2><p>包含Name和Path两个属性，即该UI的名字和Prefabs的相对路径</p><blockquote><p>因为在UIManager类中，用了Resources.Load方法，因此Path应该是<strong>保存在Resources文件夹</strong>下的Prefabs的相对路径</p></blockquote><h2 id="BasePanel类"><a href="#BasePanel类" class="headerlink" title="BasePanel类"></a>BasePanel类</h2><p>所有UIPanel类的父类，是一个抽象类</p><p>有管理进入操作、暂停操作、继续操作、退出操作的方法</p><blockquote><p>举例：当设置界面弹出时，主界面上的按钮应该失去点击效果，因此需要暂停和继续操作</p></blockquote><h2 id="UIManager类"><a href="#UIManager类" class="headerlink" title="UIManager类"></a>UIManager类</h2><p>管理所有UI信息，和所有UI的创建、销毁</p><h3 id="存储UI信息"><a href="#存储UI信息" class="headerlink" title="存储UI信息"></a>存储UI信息</h3><pre><code class="line-numbers language-c#">private Dictionary&lt;UIType, GameObject&gt; dicUI;</code></pre><h2 id="PanelManager类"><a href="#PanelManager类" class="headerlink" title="PanelManager类"></a>PanelManager类</h2><p>Panel管理器，采用栈存储UIPanel，入栈即显示该Panel，栈顶元素即为当前最前界面，非栈顶元素处于暂停状态</p><h2 id="UI-Tool-类"><a href="#UI-Tool-类" class="headerlink" title="UI Tool 类"></a>UI Tool 类</h2><p>管理UI，获取子组件、子对象组件</p><h3 id="获取或添加一个组件"><a href="#获取或添加一个组件" class="headerlink" title="获取或添加一个组件"></a>获取或添加一个组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponent&lt;T&gt;() where T : Component{    //T：组件类型    if (activePanel.GetComponent&lt;T&gt;() == null)    {        activePanel.AddComponent&lt;T&gt;();    }    return activePanel.GetComponent&lt;T&gt;();}</code></pre><h3 id="获取子对象"><a href="#获取子对象" class="headerlink" title="获取子对象"></a>获取子对象</h3><pre><code class="line-numbers language-C#">public GameObject FindChildGameObject(string name){    //name：子对象名称    Transform[] trans = activePanel.GetComponentsInChildren&lt;Transform&gt;();    foreach (Transform item in trans)    {        if (item.name == name)        {            return item.gameObject;        }    }    Debug.LogWarning($&quot;{activePanel.name}里没有{name}&quot;);    return null;}</code></pre><h3 id="获取子对象的组件"><a href="#获取子对象的组件" class="headerlink" title="获取子对象的组件"></a>获取子对象的组件</h3><pre><code class="line-numbers language-c#">public T GetOrAddComponentInChildren&lt;T&gt;(string name) where T : Component{    GameObject child = FindChildGameObject(name);    if (child)    {        if (child.GetComponent&lt;T&gt;() == null)        {            child.AddComponent&lt;T&gt;();        }        return child.GetComponent&lt;T&gt;();    }    return null;}</code></pre><h2 id="具体Panel类的创建"><a href="#具体Panel类的创建" class="headerlink" title="具体Panel类的创建"></a>具体Panel类的创建</h2><p>继承BasePanel类，并将相对路径传入构造函数、重写方法</p><p>并且在OnEnter方法中通过UITool类中实现的方法获取Button子对象的Button组件来实现添加onClik监听器</p><pre><code class="line-numbers language-c#">UITool.GetOrAddComponentInChildren&lt;Button&gt;(&quot;ButtonName&quot;).onClick.AddListener(() =&gt;{    //点击事件});</code></pre><h1 id="SceneManager"><a href="#SceneManager" class="headerlink" title="SceneManager"></a>SceneManager</h1><h2 id="SceneState类"><a href="#SceneState类" class="headerlink" title="SceneState类"></a>SceneState类</h2><p>场景状态，抽象类，有OnEnter方法和OnExit方法，分别是进入执行的操作和退出执行的操作</p><h2 id="SceneSystem类"><a href="#SceneSystem类" class="headerlink" title="SceneSystem类"></a>SceneSystem类</h2><p>场景状态管理</p><pre><code class="line-numbers language-c#">private SceneState sceneState;//设置当前场景，并进入当前场景public void SetScene(SceneState state){    sceneState?.OnExit();    sceneState = state;    sceneState?.OnEnter();}</code></pre><p><a href="#?.">“?.”是什么？</a></p><h2 id="具体Scene类的创建"><a href="#具体Scene类的创建" class="headerlink" title="具体Scene类的创建"></a>具体Scene类的创建</h2><p>继承SceneState类，重写OnEnter和OnExit方法</p><p>并用PanelManager生成该场景初始UI面板</p><pre><code class="line-numbers language-c#">// 开始场景public class StartScene : SceneState{    private readonly string sceneName = &quot;Start&quot;;    private PanelManager panelManager;    public override void OnEnter()    {        panelManager = new PanelManager();        if (SceneManager.GetActiveScene().name != sceneName)        {            SceneManager.LoadScene(sceneName);            SceneManager.sceneLoaded += SceneLoaded;        }        else        {            panelManager.Push(new StartPanel());        }    }    public override void OnExit()    {        SceneManager.sceneLoaded -= SceneLoaded;    }    // 场景加载完毕之后执行    private void SceneLoaded(Scene scene, LoadSceneMode load)    {        panelManager.Push(new StartPanel());    }}</code></pre><h1 id="GameRoot类"><a href="#GameRoot类" class="headerlink" title="GameRoot类"></a>GameRoot类</h1><p>管理全局的一些东西，例如场景切换，需要绑定在Object上</p><p>采用单例模式</p><p>例：游戏开始时展示Start场景</p><pre><code class="line-numbers language-c#">private void Start(){    SceneSystem.SetScene(new StartScene());}</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p><a href="https://www.bilibili.com/video/BV1Bz4y1D7rL" target="_blank" rel="noopener">友人aa - [Unity编程]这大概是最好理解的UI框架了吧</a></p><div id="?."></div><p><a href="https://www.cnblogs.com/niyl/p/12987610.html" target="_blank" rel="noopener">C#中 ??、 ?、 ?: 、?.、?[]</a></p>]]></content>
     
@@ -64,12 +58,6 @@
     </summary>
     
     
-      <category term="Unity" scheme="http://insyent.today/categories/Unity/"/>
-    
-      <category term="学习" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="C#" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/C/"/>
-    
     
       <category term="游戏开发" scheme="http://insyent.today/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
@@ -80,7 +68,7 @@
     <link href="http://insyent.today/BitNn/"/>
     <id>http://insyent.today/BitNn/</id>
     <published>2020-11-06T05:42:33.000Z</published>
-    <updated>2020-11-08T13:35:26.334Z</updated>
+    <updated>2021-06-20T14:06:58.895Z</updated>
     
     <content type="html"><![CDATA[<p>​         今天Leetcode的题是<a href="https://leetcode-cn.com/problems/sort-integers-by-the-number-of-1-bits/" target="_blank" rel="noopener">根据数字二进制下 1 的数目排序</a>，本菜鸡就认认真真的暴力求解了，发现题解里有通过 n &amp; (n-1)来统计二进制下1的数目的，认真学习一下这个神奇的位运算。</p><a id="more"></a><h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>将n的二进制表示中的最低位为1的改为0</p><p>大概举个例子就是：</p><pre><code class="line-numbers language-c++">int n = 20; //2进制即为 10100// n-1= 19    2进制即为 10011n &amp;= (n - 1);cout &lt;&lt; n &lt;&lt; endl; //输出结果为16 二进制为10000</code></pre><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="判断一个数是否是2的方幂"><a href="#判断一个数是否是2的方幂" class="headerlink" title="判断一个数是否是2的方幂"></a>判断一个数是否是2的方幂</h2><pre><code class="line-numbers language-c++">n &gt; 0 &amp;&amp; ((n &amp; (n - 1)) == 0 )</code></pre><p>即 n二进制下只有一位是1</p><h2 id="统计二进制表示中1的个数"><a href="#统计二进制表示中1的个数" class="headerlink" title="统计二进制表示中1的个数"></a>统计二进制表示中1的个数</h2><pre><code class="line-numbers language-c++">int count = 0;while(n) {    n &amp;= (n -1);    count++;}</code></pre>]]></content>
     
@@ -90,12 +78,6 @@
     
     </summary>
     
-    
-      <category term="LeetCode" scheme="http://insyent.today/categories/LeetCode/"/>
-    
-      <category term="学习" scheme="http://insyent.today/categories/LeetCode/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="位运算" scheme="http://insyent.today/categories/LeetCode/%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
     
       <category term="算法" scheme="http://insyent.today/tags/%E7%AE%97%E6%B3%95/"/>
@@ -107,7 +89,7 @@
     <link href="http://insyent.today/RobbiePlatform/"/>
     <id>http://insyent.today/RobbiePlatform/</id>
     <published>2020-10-20T12:31:54.000Z</published>
-    <updated>2021-04-14T15:14:37.995Z</updated>
+    <updated>2021-06-20T14:06:51.115Z</updated>
     
     <content type="html"><![CDATA[<p>基于Unity的平台2D小游戏，学习于steam上的<a href="https://store.steampowered.com/app/718010/Robbie_Swifthand_and_the_Orb_of_Mysteries/" target="_blank" rel="noopener">Robbie Swifthand and the Orb of Mysteries</a></p><p>素材来自该游戏公司公开的免费的<a href="https://pan.baidu.com/s/1c0I1pO7Rr8w4s4SGcfscHA%02" target="_blank" rel="noopener">素材</a>，提取码：a338</p><p>完结工程在<a href="https://github.com/JuWuhe/RobbiePlatform" target="_blank" rel="noopener">Github</a></p><ul><li>Rule Tile</li><li>Tilemap Collider 2D</li><li>Unity代码整理技巧 Header等</li></ul><a id="more"></a><h1 id="Tilemap-Collider-2D"><a href="#Tilemap-Collider-2D" class="headerlink" title="Tilemap Collider 2D"></a>Tilemap Collider 2D</h1><p>​        Used By Composite 可以使用复合式的Collider，避免角色在不同贴片之间被Collider卡住。但是需要添加一个Composite Collider 2D组件。此时对于该TileMap的Collider已经变成整体，对于后续添加的贴片，会直接在该碰撞器本身添加范围，一直保持为一个整体的Collider。</p><blockquote><p>需留意的是在自动添加的Rigidbody2D中的重力属性，不希望下落需设置为0或者将Object设置为static</p></blockquote><h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>]]></content>
     
@@ -125,12 +107,6 @@
     </summary>
     
     
-      <category term="Unity" scheme="http://insyent.today/categories/Unity/"/>
-    
-      <category term="学习" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="2D" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/2D/"/>
-    
     
       <category term="游戏开发" scheme="http://insyent.today/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
     
@@ -141,7 +117,7 @@
     <link href="http://insyent.today/EasyDown/"/>
     <id>http://insyent.today/EasyDown/</id>
     <published>2020-07-18T02:57:11.000Z</published>
-    <updated>2021-02-02T09:19:46.339Z</updated>
+    <updated>2021-06-20T14:06:40.658Z</updated>
     
     <content type="html"><![CDATA[<p>基于Unity的真男人就下一百层的2D小游戏</p><p>素材来自UnityAssetStore里免费的<a href="https://assetstore.unity.com/packages/2d/characters/pixel-adventure-1-155360" target="_blank" rel="noopener">Pixel Adventure 1</a></p><p>完结代码在<a href="https://github.com/JuWuhe/Down100Floors" target="_blank" rel="noopener">Github</a></p><ul><li>Joint 2D 组件</li><li>Line Renderer 组件</li><li>Gizmos.Draw 可视化范围</li><li>随机生成平台的方法</li></ul><a id="more"></a><h2 id="背景移动的实现"><a href="#背景移动的实现" class="headerlink" title="背景移动的实现"></a>背景移动的实现</h2><h3 id="脚本控制Material的Offset"><a href="#脚本控制Material的Offset" class="headerlink" title="脚本控制Material的Offset"></a>脚本控制Material的Offset</h3><h4 id="1-脚本获取Quard的Material"><a href="#1-脚本获取Quard的Material" class="headerlink" title="1.脚本获取Quard的Material"></a>1.脚本获取Quard的Material</h4><p>​    因为Quard上并没有Material的项目，而是通过Mesh Renderer调整材质，所以需要用：</p><pre><code class="line-numbers language-c#">material = GetComponent&lt;Renderer&gt;().material;</code></pre><h4 id="2-脚本控制Material的Offset"><a href="#2-脚本控制Material的Offset" class="headerlink" title="2.脚本控制Material的Offset"></a>2.脚本控制Material的Offset</h4><p>​    由<strong>public</strong> Vector2 speed来控制Vecotr2 movement的变化，再用movement将值通过Material的mainTextureOffset方法传入。</p><pre><code class="line-numbers language-c#">movement += speed * Time.deltaTime;material.mainTextureOffset = movement;</code></pre><h2 id="几种平台功能的实现"><a href="#几种平台功能的实现" class="headerlink" title="几种平台功能的实现"></a>几种平台功能的实现</h2><h3 id="翻转平台"><a href="#翻转平台" class="headerlink" title="翻转平台"></a>翻转平台</h3><p>​    通过Hinge Joint组件实现</p><h3 id="弹跳平台"><a href="#弹跳平台" class="headerlink" title="弹跳平台"></a>弹跳平台</h3><h4 id="1-弹跳动画切换"><a href="#1-弹跳动画切换" class="headerlink" title="1.弹跳动画切换"></a>1.弹跳动画切换</h4><p>​    在idle和run动画间切换，通过OnCollisionEnter2D方法检查碰撞和标签来通过Animator播放run动画</p><pre><code class="line-numbers language-c#">void OnCollisionEnter2D(Collision2D collision){    if (collision.gameObject.CompareTag(&quot;Player&quot;))    {        animator.Play(&quot;FanPlatform_run&quot;);    }}</code></pre><h4 id="2-弹跳功能实现"><a href="#2-弹跳功能实现" class="headerlink" title="2.弹跳功能实现"></a>2.弹跳功能实现</h4><p>​    在PlayerControl.cs中用OnCollisionEnter2D方法检测</p><blockquote><p>因为这里将弹跳平台Tag标为Fan，与其他平台不同，因此在检测人物是否站在平台上时需要<a href="#isOnGround">其他方法</a></p></blockquote><pre><code class="line-numbers language-c#">private void OnCollisionEnter2D(Collision2D collision) {    if (collision.gameObject.CompareTag(&quot;Fan&quot;))    {        rb.velocity = new Vector2(rb.velocity.x, 10f);    }    }</code></pre><h3 id="摇摆铁锤"><a href="#摇摆铁锤" class="headerlink" title="摇摆铁锤"></a>摇摆铁锤</h3><h4 id="1-摇摆"><a href="#1-摇摆" class="headerlink" title="1.摇摆"></a>1.摇摆</h4><p>​    通过Distance Joint实现摇摆功能</p><h4 id="2-连线"><a href="#2-连线" class="headerlink" title="2.连线"></a>2.连线</h4><p>​    <del>可以用很多个Chain连接</del></p><p>​    使用Line Renderer组件来画线，通过代码获取顶点位置并设置进组件</p><p>​    <strong>缺点：虽然省了很多麻烦 但实在不美观</strong> 想要美化还需要制作新的Material</p><pre><code class="line-numbers language-c#">LineRenderer line;public Transform startPoint;public Transform endPoint;//start:line = GetComponent&lt;LineRenderer&gt;();//update:line.SetPosition(0,startPoint.position);line.SetPosition(1, endPoint.position);</code></pre><h3 id="平台控制"><a href="#平台控制" class="headerlink" title="平台控制"></a>平台控制</h3><h4 id="1-上升"><a href="#1-上升" class="headerlink" title="1.上升"></a>1.上升</h4><p>​    通过修改Position实现移动效果，因此需要<strong>Vector3</strong> Movement，并在Start中传入Movement.y，在Update中调用MovePlatform方法。</p><pre><code class="line-numbers language-c#">void MovePlatform(){    transform.position += movement * Time.deltaTime;}</code></pre><h4 id="2-销毁"><a href="#2-销毁" class="headerlink" title="2.销毁"></a>2.销毁</h4><p>​    为了避免随着游戏运行，平台一直上升的情况，需要设置临界点使平台消失。设置Empty为Topline，在代码中通过GameObject的Find方法获取。</p><pre><code class="line-numbers language-c#">topline = GameObject.Find(&quot;TopLine&quot;);</code></pre><p>​    在MovePlatform方法中添加销毁代码</p><pre><code class="line-numbers language-c#">if(transform.position.y &gt;= topline.transform.position.y){  Destroy(gameObject);}</code></pre><h3 id="随机生成平台"><a href="#随机生成平台" class="headerlink" title="随机生成平台"></a>随机生成平台</h3><p>​        设置Empty为StartLine，既作平台生成点也作掉落死亡判断点（Tag设为尖刺）</p><p>​        在代码中public 一个GameObject List，并在Unity中将Size调整为3 再通过Instantiate方法生成平台</p><pre><code class="line-numbers language-c#">public class Spawner : MonoBehaviour{    public List&lt;GameObject&gt; platforms = new List&lt;GameObject&gt;();    //控制随机生成间隔时间    public float spawnTime;     private float countTime;      private Vector3 spawnPosition;    void Update()    {        SpawnPlatform();    }    public void SpawnPlatform()    {        countTime += Time.deltaTime;        spawnPosition = transform.position;        spawnPosition.x = Random.Range(-3f, 3f);  //具体数值具体调整        if(countTime &gt;= spawnTime)        {            CreatPlatform();            countTime = 0;        }    }    public void CreatPlatform()    {        int index = Random.Range(0, platforms.Count);        Instantiate(platforms[index], spawnPosition, Quaternion.identity);    }}</code></pre><p>​        当然这里可以添加一些概率算法来辅助生成，避免难度过高的平台连续生成等</p><p>​        还可以调整Platform数组的各种类平台占比，来调整游戏难度，也可以随时间改变各种类平台的占比来调整难度等</p><p>​        <em>附：最简单的控制方法</em></p><pre><code class="line-numbers language-c#">if (index == 4) //控制铁球生成数目{    spikeNum++;}if(spikeNum &gt; 1){    spikeNum = 0;    countTime = spawnTime; //生成新平台    return; //跳过该次生成}</code></pre><blockquote><p>随机生成平台这里还有个<a href="#More">小bug</a></p></blockquote><h2 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h2><div id="isOnGround"></div><h3 id="站地检测"><a href="#站地检测" class="headerlink" title="站地检测"></a>站地检测</h3><p>​        通过Physics2D.OverlapCircle(vector2 point,float radius,int LayerMask)方法检测是否站地: 点、半径、图层，以地面检测点点为圆心作半径圆，检测地面图层</p><pre><code class="line-numbers language-c#">bool isOnGround;public float checkRadius;public LayerMask platform;public GameObject groundCheck;//Update:isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,platform);</code></pre><p>​        可以通过OnDrawGizmosSelected()可视化绘制一个圆用作checkRadius可视化范围检测</p><pre><code class="line-numbers language-c#">    private void OnDrawGizmosSelected()    {        Gizmos.color = Color.blue;        //如果使用DrawSphere则是实心的        Gizmos.DrawWireSphere(groundCheck.transform.position, checkRadius);    }</code></pre><h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><h3 id="计分"><a href="#计分" class="headerlink" title="计分"></a>计分</h3><p>​        为了避免重新游戏后 计分继上一次游戏续，需要使用timeSinceLevelLoad方法</p><pre><code class="line-numbers language-c#">timeScore.text = Time.timeSinceLevelLoad.ToString(&quot;000&quot;);</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><div id="More"></div><h3 id="Bugs-amp-解决方法"><a href="#Bugs-amp-解决方法" class="headerlink" title="Bugs&amp;解决方法"></a>Bugs&amp;解决方法</h3><ul><li><p>由于在代码中使用的是OnTriggerEnter2D检测尖刺碰撞，而在铁球和Player都不为Trigger时是不能触发的，Player会将铁球弹开而不触发Spike的Tag结束游戏</p><p><strong>解决方法</strong>：将铁球标为IsTrigger，此时Player将穿过铁球结束游戏且下面的问题也消失。</p></li><li><p>随机生成的铁球会卡在平台上</p><p><strong>考虑的另一种解决方法</strong>：在Layer Collision Matrix取消Spike图层和Platform图层的碰撞，这样也可以将顶端尖刺的IsTrigger取消，让Player不会穿过尖刺继续向上，但在代码中要修改为OnCollisionEnter2D</p></li></ul><h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h3><p><a href="https://connect.unity.com/p/unityru-men-kuai-su-zuo-yi-ge-shang-yin-de-xiao-you-xi" target="_blank" rel="noopener">Michael-Connect</a></p>]]></content>
     
@@ -159,12 +135,6 @@
     
     </summary>
     
-    
-      <category term="Unity" scheme="http://insyent.today/categories/Unity/"/>
-    
-      <category term="学习" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="2D" scheme="http://insyent.today/categories/Unity/%E5%AD%A6%E4%B9%A0/2D/"/>
     
     
       <category term="游戏开发" scheme="http://insyent.today/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>

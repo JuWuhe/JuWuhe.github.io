@@ -148,11 +148,6 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
 </ul>
 <h3 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h3><p><a href="https://connect.unity.com/p/unityru-men-kuai-su-zuo-yi-ge-shang-yin-de-xiao-you-xi" target="_blank" rel="noopener">Michael-Connect</a></p>
 ]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>2D</category>
-      </categories>
       <tags>
         <tag>游戏开发</tag>
       </tags>
@@ -177,11 +172,6 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
     } while(sub != k);</code></pre>
 <p>比如k = 10101的二进制子集有：10101、10100、10001、10000、00101、00100、00001、00000</p>
 ]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>学习</category>
-        <category>位运算</category>
-      </categories>
       <tags>
         <tag>算法</tag>
       </tags>
@@ -205,11 +195,6 @@ isOnGround = Physics2D.OverlapCircle(groundCheck.transform.position,checkRadius,
 </blockquote>
 <h1 id="代码中的-Header-“text”"><a href="#代码中的-Header-“text”" class="headerlink" title="代码中的[Header(“text”)]"></a>代码中的[Header(“text”)]</h1><p>​        组织在该下声明的变量在Inspector的Script中规范显示，<a href="https://blog.csdn.net/piai9568/article/details/96200487" target="_blank" rel="noopener">用例</a>、<a href="https://blog.csdn.net/FifthGently/article/details/78363364" target="_blank" rel="noopener">常用集</a>。</p>
 ]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>2D</category>
-      </categories>
       <tags>
         <tag>游戏开发</tag>
       </tags>
@@ -235,11 +220,6 @@ while(n)
     count++;
 }</code></pre>
 ]]></content>
-      <categories>
-        <category>LeetCode</category>
-        <category>学习</category>
-        <category>位运算</category>
-      </categories>
       <tags>
         <tag>算法</tag>
       </tags>
@@ -371,11 +351,6 @@ public class StartScene : SceneState
 
 <p><a href="https://www.cnblogs.com/niyl/p/12987610.html" target="_blank" rel="noopener">C#中 ??、 ?、 ?: 、?.、?[]</a></p>
 ]]></content>
-      <categories>
-        <category>Unity</category>
-        <category>学习</category>
-        <category>C#</category>
-      </categories>
       <tags>
         <tag>游戏开发</tag>
       </tags>
